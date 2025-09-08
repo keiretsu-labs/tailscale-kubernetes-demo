@@ -6,10 +6,10 @@ metadata:
   region: us-west-2
   version: "1.33"
 
-kubernetesNetworkConfig:
-  serviceIPv4CIDR: "10.81.0.0/16"
 vpc:
-  cidr: "10.80.0.0/16"
+  cidr: "10.2.0.0/24"
+kubernetesNetworkConfig:
+  serviceIPv4CIDR: "10.2.1.0/24"
 
 iam:
   withOIDC: true

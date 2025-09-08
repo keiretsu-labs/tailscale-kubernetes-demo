@@ -8,9 +8,9 @@ data:
   LOCATION: 
   SITE_ID: "5"
   TIMEZONE: America/New_York
-  CLUSTER_NAME: eks-
-  CLUSTER_DOMAIN: .rajsingh.info
+  CLUSTER_NAME: eks-use1
+  CLUSTER_DOMAIN: use1.rajsingh.info
 
   # K8s
-  CLUSTER_POD_CIDR: 10.80.0.0/16
-  CLUSTER_SERVICE_CIDR: 10.81.0.0/16
+  CLUSTER_POD_CIDR: 10.1.0.0/24
+  CLUSTER_SERVICE_CIDR: 10.1.1.0/24

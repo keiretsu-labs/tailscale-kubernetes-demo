@@ -25,6 +25,6 @@ delete:
 	-eksctl delete cluster -f clusters/$(CLUSTER)/ekscluster.yaml
 
 clean-devices:
-	gh repo set-default rajsinghtech/tailscale-kubernetes-demo
+	gh repo set-default keiretsu-labs/tailscale-kubernetes-demo
 	gh workflow run delete-inactive-tailnet-nodes.yml -f dry_run=false
 
