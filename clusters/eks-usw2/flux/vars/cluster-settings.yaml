@@ -6,7 +6,7 @@ metadata:
   namespace: flux-system
 data:
   LOCATION: usw2
-  SITE_ID: "5"
+  SITE_ID: "2"
   TIMEZONE: America/New_York
   CLUSTER_NAME: eks-usw2
   CLUSTER_DOMAIN: usw2.rajsingh.info
