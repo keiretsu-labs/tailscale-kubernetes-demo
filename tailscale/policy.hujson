@@ -1,4 +1,4 @@
-// This tailnet's ACLs are maintained in https://github.com/rajsinghtech/kubernetes-manifests
+// This tailnet's ACLs are maintained in https://github.com/keiretsu-labs/tailscale-kubernetes-demo
 {
 	// ============================================================================
 	// NETWORK CONFIGURATION

@@ -1,6 +1,0 @@
-# Load kernel modules for networking and performance
-machine:
-  kernel:
-    modules:
-      - name: thunderbolt_net
-      - name: tcp_bbr  # BBR congestion control algorithm
