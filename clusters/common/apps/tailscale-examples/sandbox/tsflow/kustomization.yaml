@@ -5,4 +5,4 @@ namespace: tailscale
 resources:
   - deployment.yaml
   - service.yaml
-  - httproute.yaml
+  - ingress.yaml
