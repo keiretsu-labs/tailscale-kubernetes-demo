@@ -7,3 +7,6 @@ create:
 
 delete:
 	eksctl delete cluster -f clusters/$(CLUSTER)/ekscluster.yaml
+
+clean-devices:
+	gh workflow run delete-inactive-tailnet-nodes.yml

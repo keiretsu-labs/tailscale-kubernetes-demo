@@ -10,7 +10,7 @@ on:
       tags:
         description: "Comma-separated list of tags to filter devices (e.g., 'tag:k8s,tag:ottawa')"
         required: true
-        default: "tag:k8s,tag:ottawa"
+        default: "tag:k8s"
       inactive_days:
         description: "Number of days of inactivity before deletion"
         required: true
