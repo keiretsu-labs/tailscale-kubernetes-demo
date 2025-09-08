@@ -33,8 +33,7 @@
 	// Define user groups for access control
 	"groups": {
 		"group:superuser": [
-			"rajsinghcpre@gmail.com", 
-			"rajsinghcpre@gmail.com"
+			"rajsinghcpre@gmail.com",
 		]
 	},
 	
@@ -120,6 +119,12 @@
 		// ------------------------------------------------------------------------
 		// SUBNET ROUTE ACCESS
 		// ------------------------------------------------------------------------
+		{
+      "src": ["group:superuser"],
+      "dst": ["ipset:use1"],
+      "ip":  ["*"],
+      "via": ["tag:usw1"],
+    },
 		{
 		"src": ["group:superuser"],
 		"dst": ["ipset:usw2"],

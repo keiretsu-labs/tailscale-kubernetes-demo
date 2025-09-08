@@ -47,3 +47,4 @@ CLAUDE.md
 *.swp
 tailscale/validate.sh
 clusters/common/bootstrap/flux/secret.yaml
+.kuberlr
