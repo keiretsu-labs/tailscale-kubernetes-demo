@@ -14,7 +14,7 @@ on:
       inactive_days:
         description: "Number of days of inactivity before deletion"
         required: true
-        default: "30"
+        default: "0"
       dry_run:
         description: "Dry run mode (only list devices, don't delete)"
         type: boolean
