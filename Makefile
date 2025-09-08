@@ -1,10 +1,10 @@
 start-all:
-	$(MAKE) start CLUSTER=eks-use1
-	$(MAKE) start CLUSTER=eks-usw2
+	$(MAKE) start CLUSTER=eks-use1 &
+	$(MAKE) start CLUSTER=eks-usw2 
 	@echo "All clusters created and bootstrapped successfully"
 
 stop-all:
-	$(MAKE) delete CLUSTER=eks-use1
+	$(MAKE) delete CLUSTER=eks-use1 &
 	$(MAKE) delete CLUSTER=eks-usw2
 	$(MAKE) clean-devices
 	@echo "All clusters deleted and devices cleaned"

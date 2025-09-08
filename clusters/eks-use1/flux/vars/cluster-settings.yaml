@@ -5,7 +5,7 @@ metadata:
   name: cluster-settings
   namespace: flux-system
 data:
-  LOCATION: 
+  LOCATION: use1
   SITE_ID: "1"
   TIMEZONE: America/New_York
   CLUSTER_NAME: eks-use1
