@@ -12,33 +12,6 @@
 	
 	// IP sets for subnet routing and network segmentation
 	"ipsets": {
-		// Robbinsdale site networks
-		"ipset:robbinsdale": [
-			"192.168.50.0/24",  // Main LAN
-			"fd7a:115c:a1e0:b1a:0:1::/96",  // 4via6 subnet
-			"10.69.0.0/16",     // LB network range
-			"10.0.0.0/16",      // Service network range
-			"10.1.0.0/16"       // Pod network range
-    ],
-
-		// Ottawa site networks
-		"ipset:ottawa": [
-			"192.168.169.0/24", // Main LAN
-			"fd7a:115c:a1e0:b1a:0:2::/96",  // 4via6 subnet
-			"10.169.0.0/16",     // LB network range
-			"10.2.0.0/16",      // Service network range
-			"10.3.0.0/16"       // Pod network range
-    ],
-
-    // St Petersburg site networks
-    "ipset:stpetersburg": [
-      "192.168.73.0/24", // Main LAN
-      "10.69.3.0/24",     // LB network range
-      "10.4.0.0/16",      // Service network range
-      "10.5.0.0/16",      // Pod network range
-      "fd7a:115c:a1e0:b1a:0:3::/96"  // 4via6 subnet
-    ],
-
     // US West 2 site networks
     "ipset:usw2": [
       "10.226.0.0/16",      // Main VPC CIDR
