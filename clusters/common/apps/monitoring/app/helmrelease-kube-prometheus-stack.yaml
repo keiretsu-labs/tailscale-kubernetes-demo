@@ -49,15 +49,6 @@ spec:
           root_url: https://grafana.robbinsdale.rajsingh.info
           domain: grafana.robbinsdale.rajsingh.info
       fullnameOverride: grafana
-      additionalDataSources:
-        - name: envoy-gateway-prometheus  
-          type: prometheus
-          uid: envoy-gateway-prometheus
-          url: http://prometheus.envoy-gateway-system
-        - name: Loki
-          type: loki
-          uid: loki
-          url: http://loki.monitoring:3100
       adminPassword: admin
       testFramework:
         enabled: false
@@ -288,76 +279,35 @@ spec:
       enabled: true
       fullnameOverride: kube-state-metrics
 ---
-apiVersion: gateway.networking.k8s.io/v1
-kind: HTTPRoute
+apiVersion: networking.k8s.io/v1
+kind: Ingress
 metadata:
   name: prometheus
   annotations:
-    item.homer.rajsingh.info/name: "Prometheus"
-    item.homer.rajsingh.info/subtitle: "Metrics & Alerting"
-    item.homer.rajsingh.info/logo: "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/prometheus.png"
-    item.homer.rajsingh.info/tag: "infrastructure"
-    item.homer.rajsingh.info/keywords: "monitoring, metrics, time-series, alerting"
-
-    service.homer.rajsingh.info/name: "Infrastructure"
-    service.homer.rajsingh.info/icon: "fas fa-server"
+    tailscale.com/proxy-group: common-ingress
 spec:
-  parentRefs:
-    - group: gateway.networking.k8s.io
-      kind: Gateway
-      name: ts
-      namespace: home
-    - group: gateway.networking.k8s.io
-      kind: Gateway
-      name: ts
-      namespace: keiretsu 
-  hostnames:
-    - "prometheus.${CLUSTER_DOMAIN}"
-  rules:
-    - backendRefs:
-        - group: ""
-          kind: Service
-          name: kube-prometheus-stack-prometheus
-          port: 9090
-          weight: 1
-      matches:
-        - path:
-            type: PathPrefix
-            value: /
+  defaultBackend:
+    service:
+      name: kube-prometheus-stack-prometheus
+      port:
+        number: 9090
+  ingressClassName: tailscale
+  tls:
+    - hosts:
+        - prometheus-${LOCATION}
 ---
-apiVersion: gateway.networking.k8s.io/v1
-kind: HTTPRoute
+apiVersion: networking.k8s.io/v1
+kind: Ingress
 metadata:
   name: grafana
   annotations:
-    item.homer.rajsingh.info/name: "Grafana"
-    item.homer.rajsingh.info/subtitle: "Analytics & Monitoring"
-    item.homer.rajsingh.info/logo: "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/grafana.png"
-    item.homer.rajsingh.info/tag: "infrastructure"
-    item.homer.rajsingh.info/keywords: "monitoring, metrics, dashboard, visualization"
-
-    service.homer.rajsingh.info/name: "Infrastructure"
-    service.homer.rajsingh.info/icon: "fas fa-server"
+    tailscale.com/proxy-group: common-ingress
 spec:
-  parentRefs:
-    - group: gateway.networking.k8s.io
-      kind: Gateway
-      name: ts
-      namespace: home
-    - group: gateway.networking.k8s.io
-      kind: Gateway
-      name: ts
-      namespace: keiretsu
-  hostnames:
-    - "grafana.${CLUSTER_DOMAIN}"
-  rules:
-    - backendRefs:
-        - group: ""
-          kind: Service
-          name: grafana
-          port: 80
-          weight: 1
-      matches:
-        - path:
-            type: PathPrefix
-            value: /
+  defaultBackend:
+    service:
+      name: grafana
+      port: 80
+  ingressClassName: tailscale
+  tls:
+    - hosts:
+        - grafana-${LOCATION}
