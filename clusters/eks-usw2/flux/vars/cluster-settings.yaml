@@ -14,6 +14,3 @@ data:
   # K8s
   CLUSTER_POD_CIDR: 10.80.0.0/16
   CLUSTER_SERVICE_CIDR: 10.81.0.0/16
-
-  # Networking
-  LAN_CIDR: fd7a:115c:a1e0:b1a:0:5::/96

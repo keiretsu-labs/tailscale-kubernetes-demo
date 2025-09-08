@@ -1,7 +1,0 @@
-{
-  "runArgs": ["--device=/dev/net/tun"],
-  "capAdd": ["NET_ADMIN", "NET_RAW", "MKNOD"],
-  "features": {
-    "ghcr.io/tailscale/codespace/tailscale": {}
-  }
-}
