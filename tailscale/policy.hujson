@@ -18,7 +18,7 @@
 			"fd7a:115c:a1e0:b1a:0:1::/96",  // 4via6 subnet
 			"10.69.0.0/16",     // LB network range
 			"10.0.0.0/16",      // Service network range
-			"10.1.0.0/16",      // Pod network range
+			"10.1.0.0/16"       // Pod network range
     ],
 
 		// Ottawa site networks
@@ -27,7 +27,7 @@
 			"fd7a:115c:a1e0:b1a:0:2::/96",  // 4via6 subnet
 			"10.169.0.0/16",     // LB network range
 			"10.2.0.0/16",      // Service network range
-			"10.3.0.0/16",      // Pod network range
+			"10.3.0.0/16"       // Pod network range
     ],
 
     // St Petersburg site networks
@@ -45,7 +45,7 @@
       "10.80.0.0/16",      // Pod network range
       "10.81.0.0/16",      // Service network range
       "fd7a:115c:a1e0:b1a:0:4::/96"  // 4via6 subnet
-    ],
+    ]
 	},
 	
 	// ============================================================================
@@ -55,9 +55,8 @@
 	// Define user groups for access control
 	"groups": {
 		"group:superuser": [
-			"kbpersonal@github",
-			"LukeHouge@github", 
-			"rajsinghtech@github"
+			"rajsinghcpre@gmail.com", 
+			"rajsinghcpre@gmail.com"
 		]
 	},
 	
@@ -71,23 +70,10 @@
 		"tag:k8s-operator": [],
 		"tag:k8s":          ["tag:k8s-operator", "autogroup:admin"],
 		"tag:k8s-recorder": ["tag:k8s-operator", "autogroup:admin"],
-		"tag:infra":        ["autogroup:admin", "tag:infra"],
 		
 		// Site-specific tags
-		"tag:keiretsu":     ["tag:k8s-operator", "autogroup:admin", "tag:infra"],
-		"tag:robbinsdale":  ["tag:k8s-operator", "autogroup:admin", "tag:infra"],
-		"tag:ottawa":       ["tag:k8s-operator", "autogroup:admin", "tag:infra"],
-		"tag:stpetersburg": ["tag:k8s-operator", "autogroup:admin", "tag:infra"],
-		"tag:pittsburgh":   ["tag:k8s-operator", "autogroup:admin", "tag:infra"],
-		"tag:use1":         ["tag:k8s-operator", "autogroup:admin", "tag:infra"],
-		"tag:usw2":         ["tag:k8s-operator", "autogroup:admin", "tag:infra"],
-		"tag:kind":         ["tag:k8s-operator", "autogroup:admin", "tag:infra"],
-
-		// Site-specific infrastructure tags
-		"tag:ottawa-infra": ["autogroup:admin", "tag:infra"],
-
-		// TCP-443-only tag
-		"tag:restricted-outbound": ["tag:k8s-operator", "autogroup:admin"],
+		"tag:use1":         ["tag:k8s-operator", "autogroup:admin"],
+		"tag:usw2":         ["tag:k8s-operator", "autogroup:admin"],
 	},
 	
 	// ============================================================================
@@ -100,15 +86,8 @@
 		"routes": {
 			"0.0.0.0/0":           ["tag:k8s"], // Default route (exit node)
 			"::/0":                ["tag:k8s"], // IPv6 default route
-			"192.168.50.0/24":     ["tag:robbinsdale"], // Robbinsdale LAN
-			"192.168.169.0/24":    ["tag:ottawa", "tag:ottawa-infra"], // Ottawa LAN
-			"192.168.73.0/24":     ["tag:stpetersburg"], // St Petersburg LAN
-      "10.80.0.0/16":        ["tag:ottawa-infra"], // US West 2 EKS Hybrid cluster control plane/Ottawa worker node pod cidr
-      "10.81.0.0/16":        ["tag:ottawa-infra"], // US West 2 EKS Hybrid cluster control plane/Ottawa worker node pod cidr			
-			"10.226.0.0/16":       ["tag:usw2"], // US West 2 VPC cidr		
 		},
 		"services": {
-      "tag:keiretsu": ["tag:k8s"],
       "tag:k8s": ["tag:k8s"],
 		},
 	},
@@ -122,7 +101,7 @@
 		{
 			"action":          "accept",
 			"src":             ["group:superuser"],
-			"dst":             ["tag:ottawa", "tag:ottawa-infra", "tag:robbinsdale"],
+			"dst":             ["tag:k8s"],
 			"users":           ["root", "autogroup:nonroot"],
 			"recorder":        ["tag:k8s-recorder"],
 			"enforceRecorder": true,
@@ -138,63 +117,11 @@
 		// BASIC NETWORK ACCESS
 		// ------------------------------------------------------------------------
 
-    // Allow Superuser to access all robbinsdale nodes
-    {
-      "src": ["group:superuser", "ipset:robbinsdale", "tag:robbinsdale"],
-      "dst": ["tag:robbinsdale"],
-      "ip": ["*"],
-      "app": {
-        "rajsingh.info/cap/tsdnsproxy": [
-          {
-            "robbinsdale.k8s": {
-              "dns": ["10.0.0.10:53"],
-              "rewrite": "svc.cluster.local",
-              "translateid": 1
-            }
-          }
-        ]
-      }
-    },
-
-    // Allow Superuser to access all ottawa nodes
-    {
-      "src": ["group:superuser", "ipset:ottawa", "tag:ottawa"],
-      "dst": ["tag:ottawa"],
-      "ip": ["*"],
-      "app": {
-        "rajsingh.info/cap/tsdnsproxy": [
-          {
-            "ottawa.k8s": {
-              "dns": ["10.2.0.10:53"],
-              "rewrite": "svc.cluster.local",
-              "translateid": 2
-            }
-          }
-        ]
-      }
-    },
-
-		// Allow Ottawa infra nodes to access each other directly
-		{
-			"src": ["tag:ottawa-infra", "tag:usw2"],
-			"dst": ["tag:ottawa-infra", "tag:usw2"],
-			"ip": ["*"]
-		},
 		// Kubernetes operator internal networking
 		{
 			"src": ["tag:k8s-operator"],
 			"dst": ["tag:k8s"],
 			"ip":  ["*"],
-		},
-		
-		// Allow members to reach k8s nodes and directly
-		{
-			"src": ["group:superuser", "tag:k8s", "tag:k8s-operator"],
-			"dst": ["tag:k8s",],
-			"ip":  ["*"],
-      "app": {
-        "tailscale.com/cap/relay": [],
-      },
 		},
 		
 		// Allow members to access their own devices
@@ -209,37 +136,17 @@
 			"src": ["group:superuser", "tag:k8s"],
 			"dst": ["autogroup:internet"],
 			"ip":  ["*"],
-			"via": ["tag:robbinsdale", "tag:ottawa"],
+			"via": ["tag:k8s"],
 		},
 		
 		// ------------------------------------------------------------------------
 		// SUBNET ROUTE ACCESS
 		// ------------------------------------------------------------------------
-		
-		// Access to subnets via subnet routers
 		{
-			"src": ["group:superuser", "tag:ottawa", "tag:usw2", "tag:robbinsdale"],
-			"dst": ["ipset:robbinsdale"],
-			"ip":  ["*"],
-			"via": ["tag:robbinsdale"],
-		},
-		{
-		"src": ["tag:ottawa-infra", "ipset:ottawa"],
+		"src": ["group:superuser"],
 		"dst": ["ipset:usw2"],
 		"ip":  ["*"],
 		"via": ["tag:usw2"],
-		},
-		{
-		"src": ["group:superuser", "tag:robbinsdale", "tag:usw2", "tag:ottawa"],
-		"dst": ["ipset:ottawa"],
-		"ip":  ["*"],
-		"via": ["tag:ottawa"],
-		},
-		{
-		"src": ["group:superuser"],
-		"dst": ["ipset:stpetersburg"],
-		"ip":  ["*"],
-		"via": ["tag:stpetersburg"],
 		},
 		
 		// ------------------------------------------------------------------------
@@ -297,43 +204,13 @@
             "connectors":["tag:k8s"],
             "domains":["docs.google.com"]
           },
-          {
-            "name":"robbinsdale",
-            "connectors":["tag:robbinsdale"],
-            "domains":[
-              "robbinsdale.k8s"
-            ],
-            "routes":["fd7a:115c:a1e0:b1a:0:1::/96"]
-          },
-          {
-            "name":"ottawa",
-            "connectors":["tag:ottawa"],
-            "domains":[
-              "ottawa.k8s"
-            ],
-            "routes":["fd7a:115c:a1e0:b1a:0:2::/96"]
-          },
         ]
       }
     },
-    {
-      "target": ["group:superuser"],
-      "attr": [
-        "experimental:exit-node-steering", // FF traffic-steering
-        // "only-tcp-443", // FF allow-only-tcp-443
-        // "custom:test" // FF metadata-node-set-attrs node-attributes-api
-      ],
-    },
-    
+    // Funnel traffic to k8s nodes
 		{
 			"target": ["tag:k8s"],
 			"attr":   ["funnel"],
-		},
-		
-		// Restricted outbound configuration
-		{
-			"target": ["tag:restricted-outbound"],
-			"attr":   ["only-tcp-443"],
 		},
 	],
   
@@ -345,27 +222,18 @@
   "tests": [
     {
       // Admin user test ACLs
-      "src": "rajsinghtech@github",
+      "src": "rajsinghcpre@gmail.com",
       "accept": [
-        "192.168.50.1:443", 
-        "192.168.169.1:443", 
-        "10.0.0.1:443",
-        "10.1.0.1:443",
-        "10.2.0.1:443",
-        "10.69.0.1:443",
-        "10.169.0.1:443",
+        "rajsinghcpre@gmail.com:53",
         "tag:k8s-operator:443",
         "tag:k8s:443",
-		    "tag:k8s:80",
-        "tag:robbinsdale:443",
-        "rajsinghtech@github:53",
       ]
     },
     {
       // K8s operator user test ACLs
       "src": "tag:k8s-operator",
       "accept": [
-        "tag:k8s:443",
+        "tag:k8s:443"
       ]
     },
     {
@@ -373,25 +241,8 @@
       "src": "tag:k8s",
       "accept": [
         "tag:k8s-operator:443",
-        "tag:k8s:443",
+        "tag:k8s:443"
       ]
-    },
-    {
-      // Robbinsdale cannot reach it's own LAN
-      "src": "tag:robbinsdale",
-      "accept": [
-        "192.168.169.1:443",
-        "192.168.50.1:443",
-      ],
-    },
-    {
-      // Ottawa cannot reach it's own LAN
-      "src": "tag:ottawa",
-      "accept": [
-        "192.168.50.1:443",
-        "192.168.169.1:443",
-        "192.168.169.114:6443",
-      ],
     },
   ],
     
