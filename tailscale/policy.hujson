@@ -14,14 +14,14 @@
 	"ipsets": {
     // US East 1 inference cluster site networks
     "ipset:use1": [
-      "10.1.0.0/24",      // Main VPC CIDR
-      "10.1.1.0/24",      // Service network range
+      "10.1.0.0/16",      // Main VPC CIDR
+      "10.11.0.0/16",      // Service network range
       "fd7a:115c:a1e0:b1a:0:1::/96"  // 4via6 subnet
     ],
     // US West 2 infrence cluster site networks
     "ipset:usw2": [
-      "10.2.0.0/24",      // Main VPC CIDR
-      "10.2.1.0/24",      // Service network range
+      "10.2.0.0/16",      // Main VPC CIDR
+      "10.12.0.0/16",      // Service network range
       "fd7a:115c:a1e0:b1a:0:2::/96"  // 4via6 subnet
     ]
 	},

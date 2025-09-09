@@ -7,9 +7,9 @@ metadata:
   version: "1.33"
 
 vpc:
-  cidr: "10.2.0.0/24"
+  cidr: "10.2.0.0/16"
 kubernetesNetworkConfig:
-  serviceIPv4CIDR: "10.2.1.0/24"
+  serviceIPv4CIDR: "10.12.0.0/16"
 
 iam:
   withOIDC: true
