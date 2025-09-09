@@ -37,17 +37,14 @@ managedNodeGroups:
     volumeType: gp3
     # Enable public IPs for direct routing via Tailscale
     privateNetworking: false
-    subnets:
-      - public
     ssh:
       allow: true 
       publicKeyPath: ~/.ssh/id_rsa.pub
     updateConfig:
       maxUnavailable: 2
-    # Allow nodes to have public IPs
+    # Required IAM policies for EKS nodes with Tailscale
     iam:
       attachPolicyARNs:
         - arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy
-        - arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy
         - arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly
         - arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore
