@@ -306,7 +306,8 @@ spec:
   defaultBackend:
     service:
       name: grafana
-      port: 80
+      port: 
+        number: 80
   ingressClassName: tailscale
   tls:
     - hosts:
