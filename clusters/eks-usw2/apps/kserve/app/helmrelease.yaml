@@ -55,3 +55,12 @@ spec:
             enableGatewayApi: true
             kserveGateway: keiretsu/ts
           domain: ${CLUSTER_DOMAIN}
+  postRenderers:
+    - kustomize:
+        patches:
+          - target:
+              version: serving.kserve.io/v1alpha1
+              kind: ClusterStorageContainer
+              name: default
+            patch: |
+              $patch: delete
