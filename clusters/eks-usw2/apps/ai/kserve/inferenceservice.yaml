@@ -6,6 +6,7 @@ metadata:
 spec:
   predictor:
     model:
+      args: ["--enable_docs_url=True"]
       modelFormat:
         name: huggingface
       args:
