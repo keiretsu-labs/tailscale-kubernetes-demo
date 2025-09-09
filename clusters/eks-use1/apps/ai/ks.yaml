@@ -16,6 +16,7 @@ spec:
     name: kubernetes-manifests
   dependsOn:
     - name: envoy-gateway-system-install
+    - name: monitoring
   wait: true
   interval: 1m
   retryInterval: 1m
