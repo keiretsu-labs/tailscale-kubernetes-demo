@@ -10,7 +10,6 @@ spec:
         name: huggingface
       args:
         - --model_name=qwen
-        - --model_id=qwen
       storageUri: "hf://Qwen/Qwen2.5-0.5B-Instruct"
       resources:
         limits:
