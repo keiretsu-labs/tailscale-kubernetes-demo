@@ -42,9 +42,3 @@ managedNodeGroups:
       publicKeyPath: ~/.ssh/id_rsa.pub
     updateConfig:
       maxUnavailable: 2
-    # Required IAM policies for EKS nodes with Tailscale
-    iam:
-      attachPolicyARNs:
-        - arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy
-        - arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly
-        - arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore
