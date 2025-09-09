@@ -32,6 +32,7 @@ spec:
   path: ./clusters/common/apps/tailscale/resources
   dependsOn:
     - name: tailscale-operator
+    - name: monitoring
   prune: true
   sourceRef:
     kind: GitRepository
