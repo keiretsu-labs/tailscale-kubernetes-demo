@@ -120,13 +120,13 @@
 		// SUBNET ROUTE ACCESS
 		// ------------------------------------------------------------------------
 		{
-      "src": ["group:superuser"],
+      "src": ["group:superuser", "tag:usw2"],
       "dst": ["ipset:use1"],
       "ip":  ["*"],
       "via": ["tag:usw1"],
     },
 		{
-		"src": ["group:superuser"],
+		"src": ["group:superuser", "tag:use1"],
 		"dst": ["ipset:usw2"],
 		"ip":  ["*"],
 		"via": ["tag:usw2"],
