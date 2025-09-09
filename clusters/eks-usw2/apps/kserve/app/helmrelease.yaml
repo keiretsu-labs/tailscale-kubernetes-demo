@@ -58,11 +58,7 @@ spec:
   postRenderers:
     - kustomize:
         patches:
-          - target:
-              version: serving.kserve.io/v1alpha1
-              kind: ClusterStorageContainer
-              name: default
-            patch: |
+          - patch: |
               apiVersion: serving.kserve.io/v1alpha1
               kind: ClusterStorageContainer
               metadata:
