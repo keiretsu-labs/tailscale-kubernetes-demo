@@ -3,6 +3,16 @@ start-all:
 	$(MAKE) start CLUSTER=eks-usw2 
 	@echo "All clusters created and bootstrapped successfully"
 
+pause-all:
+	$(MAKE) pause CLUSTER=eks-use1
+	$(MAKE) pause CLUSTER=eks-usw2
+	@echo "All clusters paused"
+
+resume-all:
+	$(MAKE) resume CLUSTER=eks-use1
+	$(MAKE) resume CLUSTER=eks-usw2
+	@echo "All clusters resumed"
+
 stop-all:
 	$(MAKE) delete CLUSTER=eks-use1
 	$(MAKE) delete CLUSTER=eks-usw2
@@ -21,6 +31,12 @@ create:
 
 delete:
 	-eksctl delete cluster -f clusters/$(CLUSTER)/ekscluster.yaml
+
+pause:
+	eksctl scale nodegroup --cluster $(CLUSTER) --nodes 0
+
+resume:
+	eksctl scale nodegroup --cluster $(CLUSTER) --nodes 2
 
 clean-devices:
 	gh repo set-default keiretsu-labs/tailscale-kubernetes-demo
