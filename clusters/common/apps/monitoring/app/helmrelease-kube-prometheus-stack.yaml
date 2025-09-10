@@ -291,23 +291,6 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: prometheus
-  annotations:
-    tailscale.com/proxy-group: common-ingress
-spec:
-  defaultBackend:
-    service:
-      name: kube-prometheus-stack-prometheus
-      port:
-        number: 9090
-  ingressClassName: tailscale
-  tls:
-    - hosts:
-        - ${LOCATION}-prometheus
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
   name: grafana
   annotations:
     tailscale.com/proxy-group: common-ingress
