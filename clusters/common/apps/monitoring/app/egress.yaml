@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: use1-prometheus
   annotations:
-    tailscale.com/tailnet-fqdn: use1-prometheus.keiretsu.ts.net
+    tailscale.com/tailnet-fqdn: use1-prometheus.raj.ts.net
     tailscale.com/proxy-group: common-egress
 spec:
   externalName: placeholder
@@ -21,7 +21,7 @@ kind: Service
 metadata:
   name: usw2-prometheus
   annotations:
-    tailscale.com/tailnet-fqdn: usw2-prometheus.keiretsu.ts.net
+    tailscale.com/tailnet-fqdn: usw2-prometheus.raj.ts.net
     # tailscale.com/tailnet-fqdn: usw2-prometheus.keiretsu.ts.net
     tailscale.com/proxy-group: common-egress
 spec:
