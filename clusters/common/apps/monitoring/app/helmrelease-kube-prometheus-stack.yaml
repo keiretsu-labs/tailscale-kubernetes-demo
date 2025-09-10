@@ -303,7 +303,7 @@ spec:
   ingressClassName: tailscale
   tls:
     - hosts:
-        - ${LOCATION}
+        - prometheus-${LOCATION}
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
