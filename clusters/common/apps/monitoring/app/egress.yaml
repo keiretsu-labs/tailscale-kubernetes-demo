@@ -4,7 +4,7 @@ metadata:
   name: use1-prometheus
   annotations:
     tailscale.com/tailnet-fqdn: use1-prometheus.raj.ts.net
-    # tailscale.com/tailnet-ip: 100.100.179.163
+    # tailscale.com/tailnet-ip: 100.82.116.107
     tailscale.com/proxy-group: common-egress
 spec:
   externalName: placeholder
@@ -23,7 +23,7 @@ metadata:
   name: usw2-prometheus
   annotations:
     tailscale.com/tailnet-fqdn: usw2-prometheus.raj.ts.net
-    # tailscale.com/tailnet-ip: 100.79.132.246
+    # tailscale.com/tailnet-ip: 100.76.51.184
     tailscale.com/proxy-group: common-egress
 spec:
   externalName: placeholder
