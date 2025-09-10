@@ -6,6 +6,6 @@ resources:
   - connector.yaml
   - proxyclass.yaml 
   - dnsconfig.yaml
-  - proxygroup.yaml
+  # - proxygroup.yaml
   - recorder.yaml
   - egress.yaml
