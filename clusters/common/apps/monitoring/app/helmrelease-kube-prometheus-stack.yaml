@@ -53,11 +53,11 @@ spec:
         - name: use1-prometheus  
           type: prometheus
           uid: use1
-          url: http://use1-prometheus.monitoring
+          url: http://use1-prometheus.monitoring:9090
         - name: usw2-prometheus  
           type: prometheus
           uid: usw2
-          url: http://usw2-prometheus.monitoring
+          url: http://usw2-prometheus.monitoring:9090
       adminPassword: admin
       testFramework:
         enabled: false
