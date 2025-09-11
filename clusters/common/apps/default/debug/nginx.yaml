@@ -1,23 +1,23 @@
-apiVersion: v1
-kind: Service
-metadata:
-  name: nginx
-  namespace: default
-  labels:
-    app: nginx
-  annotations:
-    tailscale.com/proxy-group: common-ingress
-    tailscale.com/hostname: ${LOCATION}-nginx
-spec:
-  type: LoadBalancer
-  loadBalancerClass: tailscale
-  ports:
-  - port: 80
-    targetPort: 80
-    protocol: TCP
-    name: http
-  selector:
-    app: nginx
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: nginx
+#   namespace: default
+#   labels:
+#     app: nginx
+#   annotations:
+#     tailscale.com/proxy-group: common-ingress
+#     tailscale.com/hostname: ${LOCATION}-nginx
+# spec:
+#   type: LoadBalancer
+#   loadBalancerClass: tailscale
+#   ports:
+#   - port: 80
+#     targetPort: 80
+#     protocol: TCP
+#     name: http
+#   selector:
+#     app: nginx
 ---
 # apiVersion: v1
 # kind: Service
@@ -25,7 +25,7 @@ spec:
 #   name: to-use1-nginx
 #   annotations:
 #     # tailscale.com/tailnet-fqdn: use1-nginx.raj.ts.net
-#     tailscale.com/tailnet-ip: 100.82.116.108
+#     tailscale.com/tailnet-ip: 100.120.131.43
 #     tailscale.com/proxy-group: common-egress
 # spec:
 #   externalName: placeholder
