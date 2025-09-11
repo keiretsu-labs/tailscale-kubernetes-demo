@@ -124,7 +124,7 @@
       "src": ["group:superuser", "tag:usw2"],
       "dst": ["ipset:use1"],
       "ip":  ["*"],
-      "via": ["tag:usw1"],
+      "via": ["tag:use1"],
     },
 		{
 		"src": ["group:superuser", "tag:use1"],
