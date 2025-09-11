@@ -52,7 +52,7 @@ spec:
         - name: TS_ACCEPT_DNS
           value: "true"
         - name: TS_EXTRA_ARGS
-          value: "--advertise-tags=tag:k8s,tag:${LOCATION} --accept-routes --ssh"
+          value: "--advertise-tags=tag:k8s,tag:${LOCATION} --accept-routes --ssh --state=mem:"
         - name: TS_HOSTNAME
           value: "${LOCATION}-sidecar"
         - name: POD_NAME
