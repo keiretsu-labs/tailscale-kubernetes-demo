@@ -4,7 +4,7 @@ metadata:
   name: tsflow
   annotations:
     tailscale.com/funnel: "true"
-    tailscale.com/proxy-group: common-ingress
+    tailscale.com/proxy-group: common-ingress 
 spec:
   defaultBackend:
     service:
