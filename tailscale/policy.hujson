@@ -100,7 +100,7 @@
     {
       "src": ["tag:k8s", "autogroup:member"],
       "dst": ["tag:relay"],
-      "ip":  ["*"],
+      // "ip":  ["*"],
       "app": {
         "tailscale.com/cap/relay": [],
       },
