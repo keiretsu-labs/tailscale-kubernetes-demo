@@ -28,6 +28,9 @@ spec:
         - containerPort: 7777
           name: relay
           protocol: UDP
+        - containerPort: 41641
+          name: wireguard
+          protocol: UDP
         env:
           # Store the state in a k8s secret
         - name: TS_KUBE_SECRET
@@ -38,8 +41,6 @@ spec:
           value: "0.0.0.0:1055"
         - name: TS_SOCKS5_SERVER
           value: "0.0.0.0:1055"
-        - name: TS_DEBUG_FIREWALL_MODE
-          value: auto
         - name: TS_AUTHKEY
           valueFrom:
             secretKeyRef:
