@@ -7,3 +7,4 @@ resources:
   - ./iperf3
   - ./sidecar
   - ./secret.yaml
+  - ./ds
