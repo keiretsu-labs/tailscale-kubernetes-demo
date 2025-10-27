@@ -4,5 +4,6 @@ kind: Kustomization
 namespace: tailscale-examples
 resources:
   - ./tsflow
+  - ./iperf3
   - ./sidecar
   - ./secret.yaml

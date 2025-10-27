@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: use1-iperf
+  annotations:
+    tailscale.com/tailnet-fqdn: use1-iperf.raj.ts.net
+spec:
+  externalName: placeholder
+  type: ExternalName
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: usw2-iperf
+  annotations:
+    tailscale.com/tailnet-fqdn: usw2-iperf.raj.ts.net
+spec:
+  externalName: placeholder
+  type: ExternalName
