@@ -34,14 +34,17 @@ spec:
         lifecycle:
           postStart:
             exec:
-              command: ["/bin/sh", "-c", "until tailscale status --json 2>/dev/null | grep -q '\"BackendState\":\"Running\"'; do sleep 2; done && tailscale set --relay-server-port=7777"]
+              command: ["/bin/sh", "-c", "sleep 10 && tailscale set --relay-server-port=7777"]
         ports:
         - containerPort: 1055
           name: socks
+          protocol: TCP
         - containerPort: 7777
           name: relay
+          protocol: UDP
         - containerPort: 41641
           name: wireguard
+          protocol: UDP
         env:
         - name: TS_KUBE_SECRET
           value: ""
