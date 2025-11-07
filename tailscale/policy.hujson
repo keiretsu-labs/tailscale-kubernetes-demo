@@ -1,81 +1,42 @@
-// This tailnet's ACLs are maintained in https://github.com/keiretsu-labs/tailscale-kubernetes-demo
 {
-	// ============================================================================
-	// NETWORK CONFIGURATION
-	// ============================================================================
-	
-	"randomizeClientPort": false, 
-	
-	// ============================================================================
-	// NETWORK DEFINITIONS
-	// ============================================================================
-	
-	// IP sets for subnet routing and network segmentation
+	"randomizeClientPort": false,
 	"ipsets": {
-    // US East 1 inference cluster site networks
     "ipset:use1": [
-      "10.1.0.0/16",      // Main VPC CIDR
-      "10.11.0.0/16",      // Service network range
-      "fd7a:115c:a1e0:b1a:0:1::/96"  // 4via6 subnet
+      "10.1.0.0/16",
+      "10.11.0.0/16",
+      "fd7a:115c:a1e0:b1a:0:1::/96"
     ],
-    // US West 2 infrence cluster site networks
     "ipset:usw2": [
-      "10.2.0.0/16",      // Main VPC CIDR
-      "10.12.0.0/16",      // Service network range
-      "fd7a:115c:a1e0:b1a:0:2::/96"  // 4via6 subnet
+      "10.2.0.0/16",
+      "10.12.0.0/16",
+      "fd7a:115c:a1e0:b1a:0:2::/96"
     ]
 	},
-	
-	// ============================================================================
-	// GROUPS
-	// ============================================================================
-	
-	// Define user groups for access control
 	"groups": {
 		"group:superuser": [
 			"rajsinghcpre@gmail.com",
-      "kartikb-tailscale@github"
+      "kartikb-tailscale@github",
+      "rajsinghtech@github"
 		]
 	},
-	
-	// ============================================================================
-	// TAG OWNERSHIP & MANAGEMENT
-	// ============================================================================
-	
-	// Define who can assign and manage each tag
 	"tagOwners": {
-		// Core infrastructure tags
 		"tag:k8s-operator": [],
 		"tag:k8s":          ["tag:k8s-operator", "autogroup:admin"],
 		"tag:k8s-recorder": ["tag:k8s-operator", "autogroup:admin"],
     "tag:relay":       ["tag:k8s-operator", "autogroup:admin"],
-		
-		// Site-specific tags
 		"tag:use1":         ["tag:k8s-operator", "autogroup:admin"],
 		"tag:usw2":         ["tag:k8s-operator", "autogroup:admin"],
 	},
-	
-	// ============================================================================
-	// AUTO-APPROVAL RULES
-	// ============================================================================
-	
-	// Automatically approve certain requests without manual intervention
 	"autoApprovers": {
 		"exitNode": ["tag:k8s"],
 		"routes": {
-			"0.0.0.0/0":           ["tag:k8s"], // Default route (exit node)
-			"::/0":                ["tag:k8s"], // IPv6 default route
+			"0.0.0.0/0":           ["tag:k8s"],
+			"::/0":                ["tag:k8s"],
 		},
 		"services": {
       "tag:k8s": ["tag:k8s"],
 		},
 	},
-	
-	// ============================================================================
-	// SSH ACCESS CONFIGURATION
-	// ============================================================================
-	
-	// Define SSH access policies
 	"ssh": [
 		{
 			"action":          "accept",
@@ -86,52 +47,32 @@
 			"enforceRecorder": true,
 		},
 	],
-	
-	// ============================================================================
-	// ACCESS GRANTS (NETWORK & APPLICATION POLICIES)
-	// ============================================================================
-	
-	"grants": [
-		// ------------------------------------------------------------------------
-		// BASIC NETWORK ACCESS
-		// ------------------------------------------------------------------------
 
-    // Relay access
+	"grants": [
     {
       "src": ["tag:k8s", "autogroup:member"],
       "dst": ["tag:relay"],
-      // "ip":  ["*"],
       "app": {
         "tailscale.com/cap/relay": [],
       },
 
     },
-
-		// Kubernetes operator internal networking
 		{
 			"src": ["tag:k8s-operator"],
 			"dst": ["tag:k8s"],
 			"ip":  ["*"],
 		},
-		
-		// Allow members to access their own devices
 		{
 			"src": ["autogroup:member"],
 			"dst": ["autogroup:self"],
 			"ip":  ["*"],
 		},
-		
-		// Allow members to use nodes as exit nodes and app connector
 		{
 			"src": ["group:superuser", "tag:k8s"],
 			"dst": ["autogroup:internet"],
 			"ip":  ["*"],
 			"via": ["tag:k8s"],
 		},
-		
-		// ------------------------------------------------------------------------
-		// SUBNET ROUTE ACCESS
-		// ------------------------------------------------------------------------
 		{
       "src": ["group:superuser", "tag:usw2"],
       "dst": ["ipset:use1"],
@@ -144,12 +85,6 @@
 		"ip":  ["*"],
 		"via": ["tag:usw2"],
 		},
-		
-		// ------------------------------------------------------------------------
-		// KUBERNETES
-		// ------------------------------------------------------------------------
-		
-		// Admin access to Kubernetes API with system:masters privileges
 		{
 			"src": ["group:superuser", "tag:k8s"],
 			"dst": ["tag:k8s","tag:k8s-operator"],
@@ -166,8 +101,6 @@
 				],
 			},
 		},
-		
-		// Member access to Kubernetes API with read-only privileges
 		{
 			"src": ["autogroup:member"],
 			"dst": ["tag:k8s","tag:k8s-operator"],
@@ -185,13 +118,8 @@
 			},
 		},
 	],
-	
-	// ============================================================================
-	// NODE ATTRIBUTES & CAPABILITIES
-	// ============================================================================
-	
 	"nodeAttrs": [
-    { 
+    {
       "target": ["*"],
       "app": {
         "tailscale.com/app-connectors": [
@@ -203,21 +131,13 @@
         ]
       }
     },
-    // Funnel traffic to k8s nodes
 		{
 			"target": ["tag:k8s"],
 			"attr":   ["funnel"],
 		},
 	],
-  
-  // ============================================================================
-  // Test ACLs
-  // ============================================================================
-  
-  // Define test ACLs
   "tests": [
     {
-      // Admin user test ACLs
       "src": "rajsinghcpre@gmail.com",
       "accept": [
         "rajsinghcpre@gmail.com:53",
@@ -226,14 +146,12 @@
       ]
     },
     {
-      // K8s operator user test ACLs
       "src": "tag:k8s-operator",
       "accept": [
         "tag:k8s:443"
       ]
     },
     {
-      // K8s user
       "src": "tag:k8s",
       "accept": [
         "tag:k8s-operator:443",
@@ -241,12 +159,5 @@
       ]
     },
   ],
-    
-	
-	// ============================================================================
-	// LEGACY CONFIGURATION (DEPRECATED)
-	// ============================================================================
-	
-	// Legacy ACL rules (deprecated - using grants instead)
 	"acls": []
 }
