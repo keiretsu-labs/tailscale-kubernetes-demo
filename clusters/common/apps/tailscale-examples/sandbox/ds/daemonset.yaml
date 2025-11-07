@@ -20,7 +20,7 @@ spec:
         command:
         - /bin/sh
         - -c
-        image: "ghcr.io/tailscale/tailscale:latest"
+        image: "ghcr.io/tailscale/tailscale:v1.90.6"
         imagePullPolicy: Always
         name: sysctler
         securityContext:
@@ -49,12 +49,12 @@ spec:
           # Store the state in a k8s secret
         - name: TS_KUBE_SECRET
           value: ""
-        - name: TS_USERSPACE
-          value: "true"
-        - name: TS_OUTBOUND_HTTP_PROXY_LISTEN
-          value: "0.0.0.0:1055"
-        - name: TS_SOCKS5_SERVER
-          value: "0.0.0.0:1055"
+        # - name: TS_USERSPACE
+        #   value: "true"
+        # - name: TS_OUTBOUND_HTTP_PROXY_LISTEN
+        #   value: "0.0.0.0:1055"
+        # - name: TS_SOCKS5_SERVER
+        #   value: "0.0.0.0:1055"
         - name: TS_AUTHKEY
           valueFrom:
             secretKeyRef:
