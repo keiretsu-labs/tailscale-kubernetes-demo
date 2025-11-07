@@ -28,7 +28,7 @@ spec:
       containers:
       - name: tailscale
         imagePullPolicy: Always
-        image: "ghcr.io/rajsinghtech/tailscale:peer"
+        image: "ghcr.io/rajsinghtech/tailscale:peer-1"
         securityContext:
           privileged: true
         lifecycle:
@@ -48,12 +48,12 @@ spec:
         env:
         - name: TS_KUBE_SECRET
           value: ""
-        # - name: TS_USERSPACE
-        #   value: "true"
-        # - name: TS_OUTBOUND_HTTP_PROXY_LISTEN
-        #   value: "0.0.0.0:1055"
-        # - name: TS_SOCKS5_SERVER
-        #   value: "0.0.0.0:1055"
+        - name: TS_USERSPACE
+          value: "true"
+        - name: TS_OUTBOUND_HTTP_PROXY_LISTEN
+          value: "0.0.0.0:1055"
+        - name: TS_SOCKS5_SERVER
+          value: "0.0.0.0:1055"
         - name: TS_AUTHKEY
           valueFrom:
             secretKeyRef:
