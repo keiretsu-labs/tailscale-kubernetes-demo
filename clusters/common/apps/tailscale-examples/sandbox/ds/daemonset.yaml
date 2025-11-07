@@ -1,76 +1,76 @@
-apiVersion: apps/v1
-kind: DaemonSet
-metadata:
-  name: tailscale
-spec:
-  selector:
-    matchLabels:
-      app: tailscale
-  template:
-    metadata:
-      labels:
-        app: tailscale
-    spec:
-      serviceAccountName: "tailscale"
-      hostNetwork: true
-      initContainers:
-      - args:
-        - sysctl -w net.ipv4.ip_forward=1 && if sysctl net.ipv6.conf.all.forwarding;
-          then sysctl -w net.ipv6.conf.all.forwarding=1; fi
-        command:
-        - /bin/sh
-        - -c
-        image: "ghcr.io/tailscale/tailscale:v1.90.6"
-        imagePullPolicy: Always
-        name: sysctler
-        securityContext:
-          privileged: true
-      containers:
-      - name: tailscale
-        imagePullPolicy: Always
-        image: "ghcr.io/rajsinghtech/tailscale:peer"
-        securityContext:
-          privileged: true
-        lifecycle:
-          postStart:
-            exec:
-              command: ["/bin/sh", "-c", "sleep 10 && tailscale set --relay-server-port=7777"]
-        ports:
-        - containerPort: 1055
-          name: socks
-          protocol: TCP
-        - containerPort: 7777
-          name: relay
-          protocol: UDP
-        - containerPort: 41641
-          name: wireguard
-          protocol: UDP
-        env:
-        - name: TS_KUBE_SECRET
-          value: ""
-        - name: TS_USERSPACE
-          value: "true"
-        - name: TS_OUTBOUND_HTTP_PROXY_LISTEN
-          value: "0.0.0.0:1055"
-        - name: TS_SOCKS5_SERVER
-          value: "0.0.0.0:1055"
-        - name: TS_AUTHKEY
-          valueFrom:
-            secretKeyRef:
-              name: ts-oauth
-              key: TS_AUTHKEY_EPHEMERAL
-              optional: true
-        - name: TS_ACCEPT_DNS
-          value: "true"
-        - name: TS_EXTRA_ARGS
-          value: "--advertise-tags=tag:k8s,tag:${LOCATION},tag:relay --accept-routes --ssh"
-        - name: POD_NAME
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.name
-        - name: POD_UID
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.uid
-        - name: TS_TAILSCALED_EXTRA_ARGS
-          value: "--port=41641"
+# apiVersion: apps/v1
+# kind: DaemonSet
+# metadata:
+#   name: tailscale
+# spec:
+#   selector:
+#     matchLabels:
+#       app: tailscale
+#   template:
+#     metadata:
+#       labels:
+#         app: tailscale
+#     spec:
+#       serviceAccountName: "tailscale"
+#       hostNetwork: true
+#       initContainers:
+#       - args:
+#         - sysctl -w net.ipv4.ip_forward=1 && if sysctl net.ipv6.conf.all.forwarding;
+#           then sysctl -w net.ipv6.conf.all.forwarding=1; fi
+#         command:
+#         - /bin/sh
+#         - -c
+#         image: "ghcr.io/tailscale/tailscale:v1.90.6"
+#         imagePullPolicy: Always
+#         name: sysctler
+#         securityContext:
+#           privileged: true
+#       containers:
+#       - name: tailscale
+#         imagePullPolicy: Always
+#         image: "ghcr.io/rajsinghtech/tailscale:peer"
+#         securityContext:
+#           privileged: true
+#         lifecycle:
+#           postStart:
+#             exec:
+#               command: ["/bin/sh", "-c", "sleep 10 && tailscale set --relay-server-port=7777"]
+#         ports:
+#         - containerPort: 1055
+#           name: socks
+#           protocol: TCP
+#         - containerPort: 7777
+#           name: relay
+#           protocol: UDP
+#         - containerPort: 41641
+#           name: wireguard
+#           protocol: UDP
+#         env:
+#         - name: TS_KUBE_SECRET
+#           value: ""
+#         - name: TS_USERSPACE
+#           value: "true"
+#         - name: TS_OUTBOUND_HTTP_PROXY_LISTEN
+#           value: "0.0.0.0:1055"
+#         - name: TS_SOCKS5_SERVER
+#           value: "0.0.0.0:1055"
+#         - name: TS_AUTHKEY
+#           valueFrom:
+#             secretKeyRef:
+#               name: ts-oauth
+#               key: TS_AUTHKEY_EPHEMERAL
+#               optional: true
+#         - name: TS_ACCEPT_DNS
+#           value: "true"
+#         - name: TS_EXTRA_ARGS
+#           value: "--advertise-tags=tag:k8s,tag:${LOCATION},tag:relay --accept-routes --ssh"
+#         - name: POD_NAME
+#           valueFrom:
+#             fieldRef:
+#               fieldPath: metadata.name
+#         - name: POD_UID
+#           valueFrom:
+#             fieldRef:
+#               fieldPath: metadata.uid
+#         - name: TS_TAILSCALED_EXTRA_ARGS
+#           value: "--port=41641"
