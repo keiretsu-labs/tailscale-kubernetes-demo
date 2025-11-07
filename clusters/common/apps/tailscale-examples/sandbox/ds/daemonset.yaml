@@ -59,3 +59,5 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.uid
+        - name: TS_TAILSCALED_EXTRA_ARGS
+          value: "--port=41641"
