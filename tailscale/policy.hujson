@@ -42,14 +42,13 @@
 	],
 
 	"grants": [
-    {
-      "src": ["*"],
-      "dst": ["tag:relay"],
-      "app": {
-        "tailscale.com/cap/relay": [],
-      },
-
-    },
+    // {
+    //   "src": ["*"],
+    //   "dst": ["tag:relay"],
+    //   "app": {
+    //     "tailscale.com/cap/relay": [],
+    //   },
+    // },
 		{
 			"src": ["tag:k8s-operator"],
 			"dst": ["tag:k8s"],
