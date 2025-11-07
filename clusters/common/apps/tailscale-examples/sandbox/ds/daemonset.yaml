@@ -31,10 +31,10 @@ spec:
         image: "ghcr.io/tailscale/tailscale:v1.90.6"
         securityContext:
           privileged: true
-        lifecycle:
-          postStart:
-            exec:
-              command: ["/bin/sh", "-c", "sleep 10 && tailscale set --relay-server-port=7777"]
+        # lifecycle:
+        #   postStart:
+        #     exec:
+        #       command: ["/bin/sh", "-c", "sleep 10 && tailscale set --relay-server-port=7777"]
         ports:
         - containerPort: 1055
           name: socks
