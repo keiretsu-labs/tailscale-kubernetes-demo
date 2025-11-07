@@ -21,16 +21,16 @@ spec:
           postStart:
             exec:
               command: ["/bin/sh", "-c", "sleep 10 && tailscale set --relay-server-port=7777"]
-        # ports:
-        # - containerPort: 1055
-        #   name: socks
-        #   protocol: TCP
-        # - containerPort: 7777
-        #   name: relay
-        #   protocol: UDP
-        # - containerPort: 41641
-        #   name: wireguard
-        #   protocol: UDP
+        ports:
+        - containerPort: 1055
+          name: socks
+          protocol: TCP
+        - containerPort: 7777
+          name: relay
+          protocol: UDP
+        - containerPort: 41641
+          name: wireguard
+          protocol: UDP
         env:
           # Store the state in a k8s secret
         - name: TS_KUBE_SECRET
