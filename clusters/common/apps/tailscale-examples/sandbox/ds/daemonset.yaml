@@ -34,7 +34,7 @@ spec:
         lifecycle:
           postStart:
             exec:
-              command: ["/bin/sh", "-c", "while ! tailscale status --json >/dev/null 2>&1; do sleep 2; done && tailscale set --relay-server-port=7777"]
+              command: ["/bin/sh", "-c", "until tailscale status --json 2>/dev/null | grep -q '\"BackendState\":\"Running\"'; do sleep 2; done && tailscale set --relay-server-port=7777"]
         ports:
         - containerPort: 1055
           name: socks
