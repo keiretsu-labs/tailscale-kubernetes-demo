@@ -16,14 +16,14 @@ spec:
       containers:
       - name: tailscale
         imagePullPolicy: Always
-        image: "ghcr.io/tailscale/tailscale:latest"
+        image: "ghcr.io/tailscale/tailscale:v1.90.6"
         lifecycle:
           postStart:
             exec:
               command: ["/bin/sh", "-c", "sleep 10 && tailscale set --relay-server-port=7777"]
         ports:
         - containerPort: 1055
-          name: tailscale
+          name: socks
           protocol: TCP
         - containerPort: 7777
           name: relay
