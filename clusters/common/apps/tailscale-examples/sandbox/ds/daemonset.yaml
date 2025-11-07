@@ -28,7 +28,7 @@ spec:
       containers:
       - name: tailscale
         imagePullPolicy: Always
-        image: "ghcr.io/tailscale/tailscale:v1.90.6"
+        image: "ghcr.io/rajsinghtech/tailscale:peer"
         securityContext:
           privileged: true
         lifecycle:
