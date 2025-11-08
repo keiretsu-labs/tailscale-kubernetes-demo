@@ -33,5 +33,6 @@ spec:
   - port: 5201
     targetPort: 5201
     protocol: TCP
+    nodePort: 31863
   type: LoadBalancer
   loadBalancerClass: tailscale
