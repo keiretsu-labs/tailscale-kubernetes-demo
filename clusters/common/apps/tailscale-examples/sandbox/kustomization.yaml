@@ -8,3 +8,4 @@ resources:
   - ./sidecar
   - ./secret.yaml
   - ./ds
+  - ./tsidp
