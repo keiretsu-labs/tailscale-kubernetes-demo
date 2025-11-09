@@ -21,10 +21,13 @@ spec:
       enabled: false
     # ollamaUrls:
     #   - "http://usw2-ai-kserve-qwen-llm-predictor.ai:80"
-    # sso:
-    #   enabled: true
-    #   enableSignup: true
-    #   github:
-    #     enabled: true
-    #     clientId: "${GITHUB_OPENWEBUI_CLIENT_ID}"
-    #     clientSecret: "${GITHUB_OPENWEBUI_CLIENT_SECRET}"
+    sso:
+      enabled: true
+      enableSignup: true
+      oidc:
+        enabled: true
+        clientID: "${TSIDP_OPENWEBUI_CLIENT_ID}"
+        clientSecret: "${TSIDP_OPENWEBUI_CLIENT_SECRET}"
+        providerUrl: "https://use1-idp.raj.ts.net"
+        providerName: "Tailscale IDP"
+        scopes: "openid email profile"
