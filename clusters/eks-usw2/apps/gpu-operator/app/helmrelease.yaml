@@ -1,0 +1,55 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: gpu-operator
+  namespace: gpu-operator
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: gpu-operator
+      version: "25.10.0"
+      sourceRef:
+        kind: HelmRepository
+        name: nvidia
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3 
+  values:
+    driver:
+      enabled: false  # Pre-installed on DGX systems
+
+    toolkit:
+      enabled: true
+      version: v1.18.0
+
+    devicePlugin:
+      enabled: true
+      version: v0.18.0
+      config:
+        name: "time-slicing-config"
+        default: "inference"
+
+    dcgmExporter:
+      enabled: true
+
+    gfd:
+      enabled: true
+
+    operator:
+      defaultRuntime: containerd
+
+    mig:
+      strategy: none  # Not using MIG for inference time-slicing
+
+    validator:
+      plugin:
+        env:
+          - name: WITH_WORKLOAD
+            value: "true"
