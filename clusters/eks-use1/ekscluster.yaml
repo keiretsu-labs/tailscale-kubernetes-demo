@@ -27,6 +27,10 @@ addons:
     version: latest
     attachPolicyARNs:
       - arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy
+  - name: aws-efs-csi-driver
+    version: latest
+    attachPolicyARNs:
+      - arn:aws:iam::aws:policy/service-role/AmazonEFSFullAccess
 
 managedNodeGroups:
   - name: ng
