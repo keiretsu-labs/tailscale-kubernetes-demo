@@ -17,6 +17,8 @@ spec:
       interval: 1m
   releaseName: open-webui
   values:
+    openaiBaseApiUrls:
+      - "http://usw2-ai-kserve-qwen-llm-predictor.ai:80/v1"
     ollama:
       enabled: false
     # ollamaUrls:
@@ -24,7 +26,7 @@ spec:
     sso:
       enabled: true
       enableSignup: true
-      enableRoleManagement: true
+      # enableRoleManagement: true
       oidc:
         enabled: true
         clientId: "${TSIDP_OPENWEBUI_CLIENT_ID}"
@@ -32,6 +34,6 @@ spec:
         providerUrl: "https://use1-idp.raj.ts.net/.well-known/openid-configuration"
         providerName: "Tailscale"
         scopes: "openid email profile"
-        roleManagement:
-          rolesClaim: "roles"
-          adminRoles: "admin"
+        # roleManagement:
+        #   rolesClaim: "roles"
+        #   adminRoles: "admin"
