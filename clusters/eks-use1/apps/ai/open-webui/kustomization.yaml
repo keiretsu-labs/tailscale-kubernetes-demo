@@ -8,3 +8,4 @@ resources:
   - egress.yaml
   - ingress.yaml
   - scrapeconfig.yaml
+  - searxng.yaml
