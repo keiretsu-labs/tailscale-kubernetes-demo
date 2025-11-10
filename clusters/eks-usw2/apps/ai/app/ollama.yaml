@@ -27,6 +27,7 @@ spec:
       models:
         pull:
           - qwen3-vl:2b
+          - qwen3:8b
 
     resources:
       requests: 
