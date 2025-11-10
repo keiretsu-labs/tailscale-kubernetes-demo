@@ -10,5 +10,5 @@ spec:
   type: ExternalName
   ports:
   - name: http
-    port: 80
+    port: 11434
     protocol: TCP
