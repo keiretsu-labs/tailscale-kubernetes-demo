@@ -26,7 +26,7 @@ spec:
       enableSignup: true
       oidc:
         enabled: true
-        clientID: "${TSIDP_OPENWEBUI_CLIENT_ID}"
+        clientId: "${TSIDP_OPENWEBUI_CLIENT_ID}"
         clientSecret: "${TSIDP_OPENWEBUI_CLIENT_SECRET}"
         providerUrl: "https://use1-idp.raj.ts.net"
         providerName: "Tailscale IDP"
