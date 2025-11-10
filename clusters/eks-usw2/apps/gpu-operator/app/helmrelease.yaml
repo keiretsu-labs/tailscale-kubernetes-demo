@@ -30,11 +30,7 @@ spec:
       version: v1.18.0
 
     devicePlugin:
-      enabled: true
-      version: v0.18.0
-      config:
-        name: "time-slicing-config"
-        default: "inference"
+      enabled: false
 
     dcgmExporter:
       enabled: true
