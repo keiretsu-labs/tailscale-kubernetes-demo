@@ -1,14 +1,14 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app ai-kserve
+  name: &app ai-app
   namespace: flux-system
 spec:
   targetNamespace: ai
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  path: ./clusters/${CLUSTER_NAME}/apps/ai/kserve
+  path: ./clusters/${CLUSTER_NAME}/apps/ai/app
   prune: true
   sourceRef:
     kind: GitRepository

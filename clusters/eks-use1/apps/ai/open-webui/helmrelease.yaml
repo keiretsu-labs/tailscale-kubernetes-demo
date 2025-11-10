@@ -17,12 +17,10 @@ spec:
       interval: 1m
   releaseName: open-webui
   values:
-    openaiBaseApiUrls:
-      - "http://usw2-ai-kserve-qwen-llm-predictor.ai:80/v1"
     ollama:
       enabled: false
-    # ollamaUrls:
-    #   - "http://usw2-ai-kserve-qwen-llm-predictor.ai:80"
+    ollamaUrls:
+      - "http://usw2-ollama:11434"
     sso:
       enabled: true
       enableSignup: true

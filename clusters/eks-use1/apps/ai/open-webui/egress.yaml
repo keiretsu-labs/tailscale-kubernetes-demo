@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: usw2-ai-kserve-qwen-llm-predictor
+  name: usw2-ollama
   annotations:
-    tailscale.com/tailnet-fqdn: usw2-ai-kserve-qwen-llm-predictor.raj.ts.net
+    tailscale.com/tailnet-fqdn: usw2-ollama.raj.ts.net
     tailscale.com/proxy-group: common-egress
 spec:
   externalName: placeholder
