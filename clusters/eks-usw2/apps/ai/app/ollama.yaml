@@ -17,6 +17,7 @@ spec:
       interval: 1m
   releaseName: ollama
   values:
+    replicaCount: 2
     ollama:
       gpu:
         enabled: true
