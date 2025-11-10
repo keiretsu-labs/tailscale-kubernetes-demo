@@ -24,6 +24,7 @@ spec:
     sso:
       enabled: true
       enableSignup: true
+      enableRoleManagement: true
       oidc:
         enabled: true
         clientId: "${TSIDP_OPENWEBUI_CLIENT_ID}"
@@ -31,3 +32,6 @@ spec:
         providerUrl: "https://use1-idp.raj.ts.net/.well-known/openid-configuration"
         providerName: "Tailscale IDP"
         scopes: "openid email profile"
+        roleManagement:
+          rolesClaim: "roles"
+          adminRoles: "admin"
