@@ -18,6 +18,9 @@ spec:
   releaseName: ollama
   values:
     replicaCount: 1
+    extraEnv: 
+    - name: OLLAMA_NUM_PARALLEL
+      value: "4"
     ollama:
       gpu:
         enabled: true
