@@ -26,7 +26,7 @@ spec:
         nvidiaResource: "nvidia.com/gpu"
       models:
         pull:
-          - qwen3-vl:8b
+          - qwen3-vl:2b
 
     resources:
       requests:
