@@ -28,6 +28,6 @@ spec:
         enabled: true
         clientId: "${TSIDP_OPENWEBUI_CLIENT_ID}"
         clientSecret: "${TSIDP_OPENWEBUI_CLIENT_SECRET}"
-        providerUrl: "https://use1-idp.raj.ts.net/.well-known/openid-configuration"
+        providerUrl: "https://use1-idp.raj.ts.net"
         providerName: "Tailscale IDP"
         scopes: "openid email profile"
