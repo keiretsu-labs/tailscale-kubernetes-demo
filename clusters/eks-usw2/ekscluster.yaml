@@ -21,6 +21,11 @@ iam:
         namespace: kube-system
       wellKnownPolicies:
         ebsCSIController: true
+    - metadata:
+        name: efs-csi-controller-sa
+        namespace: kube-system
+      wellKnownPolicies:
+        efsCSIController: true
 
 addons:
   - name: aws-ebs-csi-driver
