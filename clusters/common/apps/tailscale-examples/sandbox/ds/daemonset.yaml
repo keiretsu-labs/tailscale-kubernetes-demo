@@ -76,4 +76,4 @@ spec:
             fieldRef:
               fieldPath: metadata.uid
         - name: TS_TAILSCALED_EXTRA_ARGS
-          value: "--port=41641"
+          value: "--state=mem: --port=41641"
