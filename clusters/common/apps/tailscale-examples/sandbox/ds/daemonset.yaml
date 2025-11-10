@@ -49,6 +49,8 @@ spec:
         env:
         - name: TS_KUBE_SECRET
           value: ""
+        - name: TS_STATE_DIR
+          value: "/tmp"
         - name: TS_USERSPACE
           value: "true"
         - name: TS_OUTBOUND_HTTP_PROXY_LISTEN
