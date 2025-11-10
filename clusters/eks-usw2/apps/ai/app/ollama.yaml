@@ -29,7 +29,7 @@ spec:
           - qwen3-vl:2b
 
     resources:
-      requests:
+      requests: 
         memory: "8Gi"
         cpu: "2000m"
         nvidia.com/gpu: "1"
