@@ -44,6 +44,8 @@ spec:
           value: "${LOCATION}-idp"
         - name: TSIDP_ENABLE_STS
           value: "1"
+        - name: TSIDP_USE_FUNNEL
+          value: "1"
         - name: TS_AUTHKEY
           valueFrom:
             secretKeyRef:
