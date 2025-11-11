@@ -31,8 +31,6 @@ spec:
         env:
           - name: TS_DEBUG_FIREWALL_MODE
             value: nftables
-          - name: TS_USERSPACE
-            value: "true"
   metrics:
     enable: true
     serviceMonitor:
