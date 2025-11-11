@@ -5,11 +5,11 @@ metadata:
   name: cluster-settings
   namespace: flux-system
 data:
-  LOCATION: usw2
+  LOCATION: eun1
   SITE_ID: "3"
   TIMEZONE: Europe/Stockholm
   CLUSTER_NAME: nks-eun1
-  CLUSTER_DOMAIN: usw2.rajsingh.info
+  CLUSTER_DOMAIN: eun1.rajsingh.info
 
   # K8s
   CLUSTER_POD_CIDR: 10.2.0.0/16
