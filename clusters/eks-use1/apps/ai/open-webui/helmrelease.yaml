@@ -21,6 +21,7 @@ spec:
       enabled: false
     ollamaUrls:
       - "http://usw2-ollama:11434"
+      - "http://eun1-ollama:11434"
     sso:
       enabled: true
       enableSignup: true
