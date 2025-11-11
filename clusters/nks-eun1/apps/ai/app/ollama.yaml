@@ -49,7 +49,7 @@ kind: Service
 metadata:
   annotations:
     tailscale.com/hostname: "${LOCATION}-ollama"
-    tailscale.com/proxy-class: "common"
+    tailscale.com/proxy-class: "common-nftables"
   name: ollama-ts
 spec:
   ports:

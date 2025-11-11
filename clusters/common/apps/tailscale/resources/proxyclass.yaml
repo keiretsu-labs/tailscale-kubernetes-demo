@@ -19,3 +19,19 @@ spec:
     enable: true
     serviceMonitor:
       enable: true
+---
+apiVersion: tailscale.com/v1alpha1
+kind: ProxyClass
+metadata:
+  name: common-nftables
+spec:
+  statefulSet:
+    pod:
+      tailscaleContainer:
+        env:
+          - name: TS_DEBUG_FIREWALL_MODE
+            value: nftables
+  metrics:
+    enable: true
+    serviceMonitor:
+      enable: true
