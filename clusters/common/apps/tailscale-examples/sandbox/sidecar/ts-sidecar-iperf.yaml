@@ -3,7 +3,7 @@ kind: StatefulSet
 metadata:
   name: ${LOCATION}-sidecar-iperf
 spec:
-  replicas: 50
+  replicas: 70
   serviceName: ${LOCATION}-sidecar-iperf
   podManagementPolicy: Parallel
   updateStrategy:
