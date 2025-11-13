@@ -7,3 +7,4 @@ resources:
   - ./ts-sidecar-userspace.yaml
   - ./ts-exit-node.yaml
   - ./rbac.yaml
+  - ./ts-sidecar-iperf.yaml
