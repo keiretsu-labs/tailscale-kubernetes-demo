@@ -47,7 +47,20 @@ managedNodeGroups:
     # Enable public IPs for direct routing via Tailscale
     privateNetworking: false
     ssh:
-      allow: true 
+      allow: true
+      publicKeyPath: ~/.ssh/id_rsa.pub
+    updateConfig:
+      maxUnavailable: 2
+  - name: ng
+    instanceType: t4g.xlarge
+    desiredCapacity: 3
+    minSize: 1
+    maxSize: 3
+    volumeType: gp3
+    # Enable public IPs for direct routing via Tailscale
+    privateNetworking: false
+    ssh:
+      allow: true
       publicKeyPath: ~/.ssh/id_rsa.pub
     updateConfig:
       maxUnavailable: 2
