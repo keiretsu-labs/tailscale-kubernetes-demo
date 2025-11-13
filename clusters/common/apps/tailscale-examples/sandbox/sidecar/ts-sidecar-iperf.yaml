@@ -3,7 +3,7 @@ kind: StatefulSet
 metadata:
   name: ${LOCATION}-sidecar-iperf
 spec:
-  replicas: 70
+  replicas: 0
   serviceName: ${LOCATION}-sidecar-iperf
   podManagementPolicy: Parallel
   updateStrategy:
@@ -25,7 +25,7 @@ spec:
         - /bin/sh
         - -c
         image: "ghcr.io/tailscale/tailscale:latest"
-        imagePullPolicy: Always
+        # imagePullPolicy: Always
         name: sysctler
         securityContext:
           privileged: true
