@@ -34,10 +34,10 @@ addons:
 
 managedNodeGroups:
   - name: ng
-    instanceType: t4g.xlarge
-    desiredCapacity: 2
+    instanceType: m8g.xlarge
+    desiredCapacity: 5
     minSize: 1
-    maxSize: 3
+    maxSize: 5
     volumeType: gp3
     # Enable public IPs for direct routing via Tailscale
     privateNetworking: false
