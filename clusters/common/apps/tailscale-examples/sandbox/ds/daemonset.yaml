@@ -20,7 +20,7 @@
 #         command:
 #         - /bin/sh
 #         - -c
-#         image: "ghcr.io/tailscale/tailscale:v1.90.6"
+#         image: "ghcr.io/tailscale/tailscale:unstable-v1.91.67"
 #         imagePullPolicy: Always
 #         name: sysctler
 #         securityContext:
@@ -28,7 +28,7 @@
 #       containers:
 #       - name: tailscale
 #         imagePullPolicy: Always
-#         image: "ghcr.io/rajsinghtech/tailscale:peer-1"
+#         image: "ghcr.io/tailscale/tailscale:unstable-v1.91.67"
 #         securityContext:
 #           privileged: true
 #         lifecycle:
