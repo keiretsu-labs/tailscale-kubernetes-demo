@@ -56,7 +56,7 @@ spec:
         - name: FAILOVER
           value: "${FAILOVER}"
       - name: tailscale
-        imagePullPolicy: Always
+        # imagePullPolicy: Always
         image: "ghcr.io/tailscale/tailscale:latest"
         securityContext:
           privileged: true
