@@ -6,6 +6,7 @@ metadata:
   namespace: flux-system
 data:
   LOCATION: usw2
+  FAILOVER: use1
   SITE_ID: "2"
   TIMEZONE: America/New_York
   CLUSTER_NAME: eks-usw2
