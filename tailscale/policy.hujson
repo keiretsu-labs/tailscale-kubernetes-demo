@@ -18,6 +18,8 @@
 		"tag:k8s-recorder": ["tag:k8s-operator", "autogroup:admin"],
     "tag:relay":       ["tag:k8s-operator", "autogroup:admin"],
 		"tag:use1":         ["tag:k8s-operator", "autogroup:admin"],
+		"tag:use1-1":         ["tag:k8s-operator", "autogroup:admin"],
+		"tag:use1-2":         ["tag:k8s-operator", "autogroup:admin"],
 		"tag:usw2":         ["tag:k8s-operator", "autogroup:admin"],
 		"tag:eun1":         ["tag:k8s-operator", "autogroup:admin"],
 	},
