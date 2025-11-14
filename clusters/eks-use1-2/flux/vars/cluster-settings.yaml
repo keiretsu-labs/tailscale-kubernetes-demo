@@ -5,7 +5,7 @@ metadata:
   name: cluster-settings
   namespace: flux-system
 data:
-  LOCATION: use1
+  LOCATION: use1-2
   FAILOVER: usw2
   SITE_ID: "1"
   TIMEZONE: America/New_York
