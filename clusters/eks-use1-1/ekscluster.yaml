@@ -1,0 +1,48 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: eks-use1-1
+  region: us-east-1
+  version: "1.33"
+
+vpc:
+  nat:
+    gateway: Disable
+  cidr: "10.1.0.0/16"
+kubernetesNetworkConfig:
+  serviceIPv4CIDR: "10.11.0.0/16"
+
+iam:
+  withOIDC: true
+  serviceAccounts:
+    - metadata:
+        name: ebs-csi-controller-sa
+        namespace: kube-system
+      wellKnownPolicies:
+        ebsCSIController: true
+
+addons:
+  - name: aws-ebs-csi-driver
+    version: latest
+    attachPolicyARNs:
+      - arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy
+  - name: aws-efs-csi-driver
+    version: latest
+    attachPolicyARNs:
+      - arn:aws:iam::aws:policy/service-role/AmazonEFSFullAccess
+
+managedNodeGroups:
+  - name: ng
+    instanceType: m8g.xlarge
+    desiredCapacity: 5
+    minSize: 1
+    maxSize: 5
+    volumeType: gp3
+    # Enable public IPs for direct routing via Tailscale
+    privateNetworking: false
+    ssh:
+      allow: true 
+      publicKeyPath: ~/.ssh/id_rsa.pub
+    updateConfig:
+      maxUnavailable: 2
