@@ -7,7 +7,7 @@ spec:
   strategy:
     type: Recreate
   selector:
-    matchLabels:
+    matchLabels: 
       app: ${LOCATION}-exit-node
   template:
     metadata:
