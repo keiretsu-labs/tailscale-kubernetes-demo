@@ -3,7 +3,7 @@ kind: StatefulSet
 metadata:
   name: ${LOCATION}-sidecar-iperf
 spec:
-  replicas: 10
+  replicas: 0
   serviceName: ${LOCATION}-sidecar-iperf
   podManagementPolicy: Parallel
   updateStrategy:
@@ -69,8 +69,6 @@ spec:
           value: "false"
         - name: TS_STATE_DIR
           value: "/dev/shm"
-        - name: TS_DEBUG_FIREWALL_MODE
-          value: auto
         - name: TS_AUTHKEY
           valueFrom:
             secretKeyRef:
@@ -81,11 +79,13 @@ spec:
           value: "true"
         - name: TS_EXTRA_ARGS
           value: "--advertise-tags=tag:k8s,tag:${LOCATION} --accept-routes --ssh"
-        - name: POD_NAME
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.name
+        - name: TS_ENABLE_METRICS
+          value: true
+        - name: TS_LOCAL_ADDR_PORT
+          value: $(POD_IP):9002
         - name: TS_HOSTNAME
+          value: $(POD_NAME)
+        - name: POD_NAME
           valueFrom:
             fieldRef:
               fieldPath: metadata.name
@@ -93,3 +93,7 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.uid
+        - name: POD_IPS
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIPs
