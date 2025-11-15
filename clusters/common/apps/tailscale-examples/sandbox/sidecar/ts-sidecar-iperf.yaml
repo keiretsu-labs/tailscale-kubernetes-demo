@@ -3,7 +3,7 @@ kind: StatefulSet
 metadata:
   name: ${LOCATION}-sidecar-iperf
 spec:
-  replicas: 0
+  replicas: 10
   serviceName: ${LOCATION}-sidecar-iperf
   podManagementPolicy: Parallel
   updateStrategy:
@@ -63,6 +63,18 @@ spec:
         securityContext:
           privileged: true
         env:
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: POD_UID
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.uid
+        - name: POD_IPS
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIPs
         - name: TS_KUBE_SECRET
           value: ""
         - name: TS_USERSPACE
@@ -85,15 +97,3 @@ spec:
           value: $(POD_IP):9002
         - name: TS_HOSTNAME
           value: $(POD_NAME)
-        - name: POD_NAME
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.name
-        - name: POD_UID
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.uid
-        - name: POD_IPS
-          valueFrom:
-            fieldRef:
-              fieldPath: status.podIPs
