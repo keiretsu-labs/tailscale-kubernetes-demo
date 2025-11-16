@@ -3,7 +3,7 @@ kind: StatefulSet
 metadata:
   name: ${LOCATION}-sidecar-peer-relay
 spec:
-  replicas: 0
+  replicas: 1
   serviceName: ${LOCATION}-sidecar-peer-relay
   podManagementPolicy: Parallel
   updateStrategy:
@@ -24,7 +24,7 @@ spec:
         command:
         - /bin/sh
         - -c
-        image: "ghcr.io/tailscale/tailscale:latest"
+        image: "ghcr.io/tailscale/tailscale:unstable-v1.91.88"
         imagePullPolicy: IfNotPresent
         name: sysctler
         securityContext:
@@ -32,7 +32,7 @@ spec:
       containers:
       - name: tailscale
         imagePullPolicy: IfNotPresent
-        image: "ghcr.io/tailscale/tailscale:latest"
+        image: "ghcr.io/tailscale/tailscale:unstable-v1.91.88"
         securityContext:
           privileged: true
         ports:
@@ -78,7 +78,7 @@ spec:
         - name: TS_HOSTNAME
           value: $(POD_NAME)
         - name: TS_DEBUG_PRETENDPOINTS
-          value: 1.1.1.1
+          value: "107.21.96.243,107.21.96.243"
         lifecycle:
           postStart:
             exec:
