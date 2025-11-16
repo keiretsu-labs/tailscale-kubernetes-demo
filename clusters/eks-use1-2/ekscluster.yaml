@@ -21,6 +21,11 @@ iam:
         namespace: kube-system
       wellKnownPolicies:
         ebsCSIController: true
+    - metadata:
+        name: aws-load-balancer-controller
+        namespace: kube-system
+      wellKnownPolicies:
+        awsLoadBalancerController: true
 
 addons:
   - name: aws-ebs-csi-driver
