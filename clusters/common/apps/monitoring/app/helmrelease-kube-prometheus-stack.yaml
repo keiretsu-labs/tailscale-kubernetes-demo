@@ -50,14 +50,14 @@ spec:
           domain: grafana.robbinsdale.rajsingh.info
       fullnameOverride: grafana
       additionalDataSources:
-        - name: use1-prometheus  
+        - name: ${LOCATION}-prometheus  
           type: prometheus
           uid: use1
-          url: http://use1-prometheus.monitoring:9090
-        - name: usw2-prometheus  
+          url: http://${LOCATION}-prometheus.monitoring:9090
+        - name: ${FAILOVER}-prometheus  
           type: prometheus
           uid: usw2
-          url: http://usw2-prometheus.monitoring:9090
+          url: http://${FAILOVER}-prometheus.monitoring:9090
       adminPassword: admin
       testFramework:
         enabled: false
@@ -321,20 +321,20 @@ spec:
   tls:
     - hosts:
         - grafana
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: kube-prometheus-stack-prometheus
-  annotations:
-    tailscale.com/proxy-group: common-ingress
-spec:
-  defaultBackend:
-    service:
-      name: kube-prometheus-stack-prometheus
-      port: 
-        number: 9090
-  ingressClassName: tailscale
-  tls:
-    - hosts:
-        - ${LOCATION}-prometheus
+# ---
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: kube-prometheus-stack-prometheus
+#   annotations:
+#     tailscale.com/proxy-class: common
+# spec:
+#   defaultBackend:
+#     service:
+#       name: kube-prometheus-stack-prometheus
+#       port: 
+#         number: 9090
+#   ingressClassName: tailscale
+#   tls:
+#     - hosts:
+#         - ${LOCATION}-prometheus

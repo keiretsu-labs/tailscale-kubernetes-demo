@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: use1-prometheus
+  name: ${LOCATION}-prometheus
   annotations:
-    # tailscale.com/tailnet-fqdn: use1-prometheus.raj.ts.net
-    tailscale.com/tailnet-ip: 100.82.116.107
+    tailscale.com/tailnet-fqdn: ${LOCATION}-prometheus.raj.ts.net
+    # tailscale.com/tailnet-ip: 100.82.116.107
     tailscale.com/proxy-group: common-egress
 spec:
   externalName: placeholder
@@ -20,10 +20,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: usw2-prometheus
+  name: ${FAILOVER}-prometheus
   annotations:
-    # tailscale.com/tailnet-fqdn: usw2-prometheus.raj.ts.net
-    tailscale.com/tailnet-ip: 100.76.51.184
+    tailscale.com/tailnet-fqdn: ${FAILOVER}-prometheus.raj.ts.net
+    # tailscale.com/tailnet-ip: 100.76.51.184
     tailscale.com/proxy-group: common-egress
 spec:
   externalName: placeholder
