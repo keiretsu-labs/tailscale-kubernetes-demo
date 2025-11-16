@@ -23,8 +23,8 @@
   "panels": [
     {
       "datasource": {
-        "type": "datasource",
-        "uid": "-- Mixed --"
+        "type": "prometheus",
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -119,8 +119,8 @@
     },
     {
       "datasource": {
-        "type": "datasource",
-        "uid": "-- Mixed --"
+        "type": "prometheus",
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -246,8 +246,8 @@
     },
     {
       "datasource": {
-        "type": "datasource",
-        "uid": "-- Mixed --"
+        "type": "prometheus",
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -342,8 +342,8 @@
     },
     {
       "datasource": {
-        "type": "datasource",
-        "uid": "-- Mixed --"
+        "type": "prometheus",
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -442,8 +442,8 @@
     },
     {
       "datasource": {
-        "type": "datasource",
-        "uid": "-- Mixed --"
+        "type": "prometheus",
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -509,8 +509,8 @@
     },
     {
       "datasource": {
-        "type": "datasource",
-        "uid": "-- Mixed --"
+        "type": "prometheus",
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -581,8 +581,8 @@
     },
     {
       "datasource": {
-        "type": "datasource",
-        "uid": "-- Mixed --"
+        "type": "prometheus",
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -643,8 +643,8 @@
     },
     {
       "datasource": {
-        "type": "datasource",
-        "uid": "-- Mixed --"
+        "type": "prometheus",
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -734,6 +734,6 @@
   "timezone": "",
   "title": "Tailscale Sidecar Metrics",
   "uid": "tailscale-sidecar-metrics",
-  "version": 2,
+  "version": 1,
   "weekStart": ""
 }
