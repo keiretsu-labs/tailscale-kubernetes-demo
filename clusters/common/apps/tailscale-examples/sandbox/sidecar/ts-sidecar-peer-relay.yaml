@@ -39,7 +39,7 @@ spec:
         - name: metrics
           containerPort: 9002
           protocol: TCP
-        - name: metrics
+        - name: relay
           containerPort: 7777
           protocol: UDP
         env:
