@@ -75,10 +75,10 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.uid
-        - name: POD_IPS
+        - name: POD_IP
           valueFrom:
             fieldRef:
-              fieldPath: status.podIPs
+              fieldPath: status.podIP
         - name: TS_KUBE_SECRET
           value: ""
         - name: TS_USERSPACE
