@@ -39,6 +39,9 @@ spec:
         - name: metrics
           containerPort: 9002
           protocol: TCP
+        - name: wireguard
+          containerPort: 41641
+          protocol: TCP
         - name: relay
           containerPort: 7777
           protocol: UDP
@@ -78,7 +81,7 @@ spec:
         - name: TS_HOSTNAME
           value: $(POD_NAME)
         - name: TS_DEBUG_PRETENDPOINT
-          value: "107.21.96.243:7777,107.21.96.243:7777"
+          value: "107.21.96.243:41641,107.21.96.243:41641"
         lifecycle:
           postStart:
             exec:
@@ -102,6 +105,10 @@ spec:
   - name: relay
     port: 7777
     targetPort: 7777
+    protocol: UDP
+  - name: wireguard
+    port: 41641
+    targetPort: 41641
     protocol: UDP
   - name: metrics
     port: 9002
