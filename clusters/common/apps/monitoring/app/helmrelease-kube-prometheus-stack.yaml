@@ -337,4 +337,4 @@ spec:
   ingressClassName: tailscale
   tls:
     - hosts:
-        - ${LOCATION}-grafana
+        - ${LOCATION}-prometheus
