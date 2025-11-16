@@ -52,11 +52,11 @@ spec:
       additionalDataSources:
         - name: ${LOCATION}-prometheus  
           type: prometheus
-          uid: use1
+          uid: ${LOCATION}
           url: http://${LOCATION}-prometheus.monitoring:9090
         - name: ${FAILOVER}-prometheus  
           type: prometheus
-          uid: usw2
+          uid: ${FAILOVER}
           url: http://${FAILOVER}-prometheus.monitoring:9090
       adminPassword: admin
       testFramework:
