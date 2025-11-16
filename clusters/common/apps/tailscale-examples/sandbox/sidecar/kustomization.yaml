@@ -8,3 +8,12 @@ resources:
   - ./ts-exit-node.yaml
   - ./rbac.yaml
   - ./ts-sidecar-iperf.yaml
+configMapGenerator:
+  - name: tailscale-sidecar-dashboard
+    files:
+      - dashboard.json
+    options:
+      annotations:
+        grafana_folder: tailscale
+      labels:
+        grafana_dashboard: "1"
