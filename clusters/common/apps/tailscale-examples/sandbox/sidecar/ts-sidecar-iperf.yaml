@@ -3,7 +3,7 @@ kind: StatefulSet
 metadata:
   name: ${LOCATION}-sidecar-iperf
 spec:
-  replicas: 10
+  replicas: 0
   serviceName: ${LOCATION}-sidecar-iperf
   podManagementPolicy: Parallel
   updateStrategy:
@@ -62,6 +62,10 @@ spec:
         image: "ghcr.io/tailscale/tailscale:latest"
         securityContext:
           privileged: true
+        ports:
+        - name: metrics
+          containerPort: 9002
+          protocol: TCP
         env:
         - name: POD_NAME
           valueFrom:
@@ -92,8 +96,27 @@ spec:
         - name: TS_EXTRA_ARGS
           value: "--advertise-tags=tag:k8s,tag:${LOCATION} --accept-routes --ssh"
         - name: TS_ENABLE_METRICS
-          value: true
+          value: "true"
         - name: TS_LOCAL_ADDR_PORT
           value: $(POD_IP):9002
         - name: TS_HOSTNAME
           value: $(POD_NAME)
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: ${LOCATION}-sidecar-iperf
+spec:
+  selector:
+    matchLabels:
+      app: ${LOCATION}-sidecar-iperf
+  podMetricsEndpoints:
+  - port: metrics
+    interval: 15s
+    relabelings:
+    - sourceLabels: [__meta_kubernetes_pod_name]
+      targetLabel: pod
+      action: replace
+    - sourceLabels: [__meta_kubernetes_namespace]
+      targetLabel: namespace
+      action: replace
