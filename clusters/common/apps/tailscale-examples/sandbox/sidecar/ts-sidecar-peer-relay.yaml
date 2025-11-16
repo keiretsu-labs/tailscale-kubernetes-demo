@@ -77,7 +77,7 @@ spec:
           value: 0.0.0.0:9002
         - name: TS_HOSTNAME
           value: $(POD_NAME)
-        - name: TS_DEBUG_PRETENDPOINTS
+        - name: TS_DEBUG_PRETENDPOINT
           value: "107.21.96.243:7777,107.21.96.243:7777"
         lifecycle:
           postStart:
