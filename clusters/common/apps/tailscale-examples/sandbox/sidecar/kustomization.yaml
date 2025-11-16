@@ -8,6 +8,7 @@ resources:
   - ./ts-exit-node.yaml
   - ./rbac.yaml
   - ./ts-sidecar-iperf.yaml
+  - ./ts-sidecar-peer-relay.yaml
 configMapGenerator:
   - name: tailscale-sidecar-dashboard
     files:
