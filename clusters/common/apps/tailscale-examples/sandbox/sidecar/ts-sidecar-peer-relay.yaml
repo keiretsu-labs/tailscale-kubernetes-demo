@@ -41,7 +41,7 @@ spec:
           protocol: TCP
         - name: wireguard
           containerPort: 41641
-          protocol: TCP
+          protocol: UDP
         - name: relay
           containerPort: 7777
           protocol: UDP
