@@ -82,6 +82,8 @@ spec:
           value: $(POD_NAME)
         - name: TS_DEBUG_PRETENDPOINT
           value: "107.21.96.243:41641,107.21.96.243:41641"
+        - name: TS_TAILSCALED_EXTRA_ARGS
+          value: "--port=41641"
         lifecycle:
           postStart:
             exec:
