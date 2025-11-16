@@ -83,17 +83,21 @@ spec:
           postStart:
             exec:
               command: ["/bin/sh", "-c", "sleep 10 && tailscale set --relay-server-port=7777"]
-# ---
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   name: ${LOCATION}-sidecar-peer-relay
-# spec:
-#   type: LoadBalancer
-#   selector:
-#     app: ${LOCATION}-sidecar-peer-relay
-#   ports:
-#   - name: relay
-#     port: 7777
-#     targetPort: 7777
-#     protocol: UDP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ${LOCATION}-sidecar-peer-relay
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-type: "external"
+    service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: "ip"
+    service.beta.kubernetes.io/aws-load-balancer-scheme: "internet-facing"
+spec:
+  type: LoadBalancer
+  selector:
+    app: ${LOCATION}-sidecar-peer-relay
+  ports:
+  - name: relay
+    port: 7777
+    targetPort: 7777
+    protocol: UDP
