@@ -14,8 +14,8 @@ resume-all:
 	@echo "All clusters resumed"
 
 stop-all:
-	$(MAKE) delete CLUSTER=eks-use1
-	$(MAKE) delete CLUSTER=eks-usw2
+	$(MAKE) delete CLUSTER=eks-use1-1
+	$(MAKE) delete CLUSTER=eks-use1-2
 	$(MAKE) clean-devices
 	@echo "All clusters deleted and devices cleaned"
 

@@ -24,7 +24,7 @@ spec:
         command:
         - /bin/sh
         - -c
-        image: "ghcr.io/tailscale/tailscale:unstable-v1.91.88"
+        image: "ghcr.io/tailscale/tailscale:unstable-v1.93.44"
         imagePullPolicy: IfNotPresent
         name: sysctler
         securityContext:
@@ -32,16 +32,13 @@ spec:
       containers:
       - name: tailscale
         imagePullPolicy: IfNotPresent
-        image: "ghcr.io/tailscale/tailscale:unstable-v1.91.88"
+        image: "ghcr.io/tailscale/tailscale:unstable-v1.93.44"
         securityContext:
           privileged: true
         ports:
         - name: metrics
           containerPort: 9002
           protocol: TCP
-        - name: wireguard
-          containerPort: 41641
-          protocol: UDP
         - name: relay
           containerPort: 7777
           protocol: UDP
@@ -80,12 +77,6 @@ spec:
           value: 0.0.0.0:9002
         - name: TS_HOSTNAME
           value: $(POD_NAME)
-        - name: TS_DEBUG_PRETENDPOINT
-          value: "98.91.169.143:41641"
-        - name: TS_DEBUG_RELAY_SERVER_ADDRS
-          value: "$(POD_IP),98.91.169.143"
-        - name: TS_TAILSCALED_EXTRA_ARGS
-          value: "--port=41641"
         lifecycle:
           postStart:
             exec:
@@ -109,10 +100,6 @@ spec:
   - name: relay
     port: 7777
     targetPort: 7777
-    protocol: UDP
-  - name: wireguard
-    port: 41641
-    targetPort: 41641
     protocol: UDP
   - name: metrics
     port: 9002
