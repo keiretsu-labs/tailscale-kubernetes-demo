@@ -6,3 +6,4 @@ resources:
   - ./istio-istiod.yaml
   - ./istio-eastwestgateway.yaml
   - ./tailscale-eastwest-egress.yaml
+  - ./tailscale-kubeconfig.yaml
