@@ -11,21 +11,3 @@ data:
       cache 30
       forward . 10.11.69.50
     }
-    use1-1-k8s-operator.raj.ts.net:53 {
-      errors
-      cache 30
-      rewrite name use1-1-k8s-operator.raj.ts.net use1-1-k8s-operator.tailscale.svc.cluster.local
-      kubernetes cluster.local in-addr.arpa ip6.arpa {
-        pods insecure
-        fallthrough in-addr.arpa ip6.arpa
-      }
-    }
-    use1-2-k8s-operator.raj.ts.net:53 {
-      errors
-      cache 30
-      rewrite name use1-2-k8s-operator.raj.ts.net use1-2-k8s-operator.tailscale.svc.cluster.local
-      kubernetes cluster.local in-addr.arpa ip6.arpa {
-        pods insecure
-        fallthrough in-addr.arpa ip6.arpa
-      }
-    }
