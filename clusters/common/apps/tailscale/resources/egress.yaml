@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: use1-1-k8s-operator
   annotations:
-    tailscale.com/tailnet-fqdn: use1-1-k8s-operator.keiretsu.ts.net
+    tailscale.com/tailnet-fqdn: use1-1-k8s-operator.raj.ts.net
     tailscale.com/proxy-group: common-egress
 spec:
   externalName: placeholder
@@ -18,12 +18,12 @@ kind: Service
 metadata:
   name: use1-2-k8s-operator
   annotations:
-    tailscale.com/tailnet-fqdn: use1-2-k8s-operator.keiretsu.ts.net
+    tailscale.com/tailnet-fqdn: use1-2-k8s-operator.raj.ts.net
     tailscale.com/proxy-group: common-egress
 spec:
   externalName: placeholder
   type: ExternalName
   ports:
   - name: https
-    port: 443 
+    port: 443
     protocol: TCP

@@ -40,9 +40,9 @@ spec:
           allow_sign_up: true
           client_id: "463f905aa1e665a2b530614f9e43d401"
           scopes: openid email profile
-          auth_url:  https://idp.keiretsu.ts.net/authorize/funnel
-          token_url: https://idp.keiretsu.ts.net/token
-          api_url:   https://idp.keiretsu.ts.net/userinfo
+          auth_url:  https://idp.raj.ts.net/authorize/funnel
+          token_url: https://idp.raj.ts.net/token
+          api_url:   https://idp.raj.ts.net/userinfo
           redirect_uri: https://grafana.robbinsdale.rajsingh.info/login/generic_oauth
           login_attribute: preferred_username
         server:
